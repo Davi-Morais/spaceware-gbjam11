@@ -1,9 +1,8 @@
 require("titleScreen")
 
-current = TitleScreen
 
 function love.load()
-    current:load()
+    current = TitleScreen:new()
 end
 
 

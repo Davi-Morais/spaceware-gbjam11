@@ -1,8 +1,13 @@
 TitleScreen = {}
 
-function TitleScreen:load()
-    self.background = love.graphics.newImage("assets/title-screen/background.png")
+function TitleScreen:new()
 
+    local titleScreen = {}
+    setmetatable(titleScreen, self)
+    self.__index = self
+
+    self.background = love.graphics.newImage("assets/title-screen/background.png")
+    
     self.stars = {}
     self.stars.image = love.graphics.newImage("assets/title-screen/stars.png")
     self.stars.speed = 5
@@ -21,6 +26,8 @@ function TitleScreen:load()
     self.discoPlay.y = love.graphics.getHeight() / 2 + self.discoPlay.image:getHeight() / 2
     self.discoPlay.yInicio = self.discoPlay.y
     self.discoPlay.speed = 50
+
+    return titleScreen
 end
 
 
@@ -56,3 +63,5 @@ function TitleScreen:draw()
     love.graphics.draw(self.title.image, self.title.x, self.title.y)
     love.graphics.draw(self.discoPlay.image, self.discoPlay.x, self.discoPlay.y)
 end
+
+
