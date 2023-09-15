@@ -2,7 +2,13 @@ TitleScreen = {}
 
 function TitleScreen:load()
     self.background = love.graphics.newImage("assets/title-screen/background.png")
-    self.stars = love.graphics.newImage("assets/title-screen/stars.png")
+
+    self.stars = {}
+    self.stars.image = love.graphics.newImage("assets/title-screen/stars.png")
+    self.stars.speed = 5
+    self.stars.x = 0
+    self.stars.y = 0
+    
 
     self.title = {}
     self.title.image = love.graphics.newImage("assets/title-screen/title.png")
@@ -20,6 +26,7 @@ end
 
 function TitleScreen:update(dt)
     moverDisco(self.discoPlay, dt)
+    moverStars(self.stars, dt)
 end
 
 function moverDisco(disco, dt) 
@@ -32,10 +39,20 @@ function moverDisco(disco, dt)
 
 end
 
+function moverStars(stars, dt) 
+
+    stars.x = stars.x + stars.speed * dt
+
+    if stars.x - 20 > 0 or stars.x + 20 < 0 then 
+        stars.speed = -stars.speed
+    end
+
+end
+
 
 function TitleScreen:draw()
     love.graphics.draw(self.background, 0, 0)
-    love.graphics.draw(self.stars, 0, 0)
+    love.graphics.draw(self.stars.image, self.stars.x, self.stars.y)
     love.graphics.draw(self.title.image, self.title.x, self.title.y)
     love.graphics.draw(self.discoPlay.image, self.discoPlay.x, self.discoPlay.y)
 end
