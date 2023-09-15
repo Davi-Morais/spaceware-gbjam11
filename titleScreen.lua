@@ -13,11 +13,23 @@ function TitleScreen:load()
     self.discoPlay.image = love.graphics.newImage("assets/title-screen/disco-play.png")
     self.discoPlay.x = love.graphics.getWidth() / 2 - self.discoPlay.image:getWidth() / 2
     self.discoPlay.y = love.graphics.getHeight() / 2 + self.discoPlay.image:getHeight() / 2
+    self.discoPlay.yInicio = self.discoPlay.y
+    self.discoPlay.speed = 50
 end
 
 
 function TitleScreen:update(dt)
-    
+    moverDisco(self.discoPlay, dt)
+end
+
+function moverDisco(disco, dt) 
+
+    disco.y = disco.y + disco.speed * dt
+
+    if disco.y > disco.yInicio + disco.image:getHeight() / 4 or disco.y < disco.yInicio - disco.image:getHeight() / 4 then 
+        disco.speed = -disco.speed
+    end
+
 end
 
 
