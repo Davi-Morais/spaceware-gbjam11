@@ -1,15 +1,18 @@
+require("titleScreen")
+
+current = TitleScreen
 
 function love.load()
-    disco = love.graphics.newImage("assets/disco-play.png")
+    current:load()
 end
 
 
 function love.update(dt)
-    
+    current:update(dt)
 end
 
 
 function love.draw()
-    love.graphics.draw(disco, 50, 50)
+    current:draw()
 end
 
