@@ -1,7 +1,5 @@
 miniGameFoguete = {}
 
-local clicks = 0
-
 function miniGameFoguete:new() 
     local miniGameFoguete = {}
     setmetatable(miniGameFoguete, self)
@@ -34,6 +32,8 @@ function miniGameFoguete:new()
 
     self.temporizador = 0
 
+    self.clicks = 0
+
     self.venceu = nil
 
     return miniGameFoguete
@@ -41,8 +41,8 @@ end
 
 
 function miniGameFoguete:update(dt)
-    moverNuvens(self.nuvens, dt)
-    buttonAnimation(self.botoes, dt)
+    self:moverNuvens(dt)
+    self:buttonAnimation(dt)
 
     self:verificarMiniGame(dt)
 
@@ -51,30 +51,30 @@ end
 function miniGameFoguete:verificarMiniGame(dt)
     self.temporizador = self.temporizador + dt
 
-    if self.temporizador > 4 and clicks < 10 then
+    if self.temporizador > 4 and self.clicks < 10 then
         self.venceu = false
-    elseif self.temporizador <= 4 and clicks >= 10 then
+    elseif self.temporizador <= 4 and self.clicks >= 10 then
         self.venceu = true
     end
 
 end
 
-function moverNuvens(nuvens, dt)
-    nuvens.x = nuvens.x + nuvens.speed * dt
+function miniGameFoguete:moverNuvens(dt)
+    self.nuvens.x = self.nuvens.x + self.nuvens.speed * dt
 end
 
 
-function buttonAnimation(botoes, dt)
-    botoes.temporizador = botoes.temporizador + dt
+function miniGameFoguete:buttonAnimation(dt)
+    self.botoes.temporizador = self.botoes.temporizador + dt
 
-    if botoes.temporizador >= botoes.intervalo then 
-        if botoes.qual == 1 then
-            botoes.qual = 2
+    if self.botoes.temporizador >= self.botoes.intervalo then 
+        if self.botoes.qual == 1 then
+            self.botoes.qual = 2
         else
-            botoes.qual = 1
+            self.botoes.qual = 1
         end
 
-        botoes.temporizador = botoes.temporizador - botoes.intervalo
+        self.botoes.temporizador = self.botoes.temporizador - self.botoes.intervalo
 
     end
 end
@@ -95,9 +95,9 @@ function miniGameFoguete:draw()
         love.graphics.draw(self.botoes.botao2, 0, 0)
     end
 
-    if clicks < 5 then
+    if self.clicks < 5 then
         love.graphics.draw(self.foguete.image, self.foguete.x, self.foguete.y)
-    elseif clicks < 9 then 
+    elseif self.clicks < 9 then 
         love.graphics.draw(self.foguete.image, self.foguete.x, self.foguete.y)
         love.graphics.draw(self.fumaca1, 0, 0)
     else 
@@ -107,8 +107,14 @@ function miniGameFoguete:draw()
 
 end
 
+
+-- Lidar com os clicks do jogador:
 function love.keypressed(key)
     if 'x' == key then 
-        clicks = clicks + 1
+        miniGameFoguete:PressA()
     end
+end
+
+function miniGameFoguete:PressA()
+    self.clicks = self.clicks + 1
 end
