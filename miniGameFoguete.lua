@@ -36,6 +36,8 @@ function miniGameFoguete:new()
 
     self.venceu = nil
 
+    self.instance = miniGameFoguete
+
     return miniGameFoguete
 end
 
@@ -44,8 +46,9 @@ function miniGameFoguete:update(dt)
     self:moverNuvens(dt)
     self:buttonAnimation(dt)
 
-    self:verificarMiniGame(dt)
-
+    if self.venceu == nil then
+        self:verificarMiniGame(dt)
+    end
 end
 
 function miniGameFoguete:verificarMiniGame(dt)
@@ -116,5 +119,10 @@ function love.keypressed(key)
 end
 
 function miniGameFoguete:PressA()
-    self.clicks = self.clicks + 1
+    
+    if nil == self.instance.venceu then
+        self.instance.clicks = self.instance.clicks + 1
+        print(self.instance.clicks)
+    end
 end
+
