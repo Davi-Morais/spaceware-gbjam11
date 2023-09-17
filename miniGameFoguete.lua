@@ -126,3 +126,20 @@ function miniGameFoguete:PressA()
     end
 end
 
+function miniGameFoguete:resetarMiniGame()
+    self.clicks = 0
+    self.venceu = nil
+
+    self.nuvens.x = 0
+    self.nuvens.y = 0
+    self.nuvens.speed = 20
+
+    self.botoes.qual = 2
+    self.botoes.intervalo = 0.3
+    self.botoes.temporizador = 0
+
+    self.foguete.x = 0
+    self.foguete.y = 0
+
+    self.temporizador = 0
+end
