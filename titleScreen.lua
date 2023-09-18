@@ -1,3 +1,5 @@
+require("controller")
+
 TitleScreen = {}
 
 function TitleScreen:new()
@@ -65,3 +67,8 @@ function TitleScreen:draw()
 end
 
 
+function love.keypressed( key, scancode, isrepeat )
+    if key =='x' or key == 'z' or key == 'return' or key == 'v' then
+        current = controller:new()
+    end
+end
