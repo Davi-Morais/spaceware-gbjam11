@@ -1,8 +1,8 @@
-require("titleScreen")
+require("controller")
 
 
 function love.load()
-    current = TitleScreen:new()
+    current = controller:new()
 end
 
 
