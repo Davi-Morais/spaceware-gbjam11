@@ -48,6 +48,8 @@ function miniGameFoguete:update(dt)
 
     if self.venceu == nil then
         self:verificarMiniGame(dt)
+    else 
+        return self.venceu
     end
 end
 
@@ -122,11 +124,10 @@ function miniGameFoguete:PressA()
     
     if nil == self.instance.venceu then
         self.instance.clicks = self.instance.clicks + 1
-        print(self.instance.clicks)
     end
 end
 
-function miniGameFoguete:resetarMiniGame()
+function miniGameFoguete:resetar()
     self.clicks = 0
     self.venceu = nil
 
