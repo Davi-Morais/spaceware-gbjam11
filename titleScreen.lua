@@ -1,5 +1,3 @@
-require("controller")
-
 TitleScreen = {}
 
 function TitleScreen:new()
@@ -36,6 +34,11 @@ end
 function TitleScreen:update(dt)
     moverDisco(self.discoPlay, dt)
     moverStars(self.stars, dt)
+
+    if love.keyboard.isDown('x') or love.keyboard.isDown('z') or love.keyboard.isDown('return') or love.keyboard.isDown('v') then
+        return 1
+    end
+
 end
 
 function moverDisco(disco, dt) 
@@ -64,11 +67,4 @@ function TitleScreen:draw()
     love.graphics.draw(self.stars.image, self.stars.x, self.stars.y)
     love.graphics.draw(self.title.image, self.title.x, self.title.y)
     love.graphics.draw(self.discoPlay.image, self.discoPlay.x, self.discoPlay.y)
-end
-
-
-function love.keypressed( key, scancode, isrepeat )
-    if key =='x' or key == 'z' or key == 'return' or key == 'v' then
-        current = controller:new()
-    end
 end
